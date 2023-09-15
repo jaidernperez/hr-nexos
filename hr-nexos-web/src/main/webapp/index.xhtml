@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>#{msg.appTitle}</title>
+</h:head>
+
+<h:body>
+
+    <p:card style="width: 25rem; margin: 3em;">
+        <f:facet name="title">
+            <p:outputLabel value="#{msg.appWelcome}"/>
+        </f:facet>
+
+        <p:outputLabel value="#{beanExample.greeting()}"/>
+
+        <div class="card">
+            <h5>Examples</h5>
+            <p:orderList value="#{beanExample.exampleList}"
+                         var="example" controlsLocation="none"
+                         itemLabel="#{example.name}"
+                         itemValue="#{example.id}" />
+        </div>
+    </p:card>
+
+</h:body>
+
+</html>

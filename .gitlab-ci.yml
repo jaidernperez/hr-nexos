@@ -1,0 +1,42 @@
+image: docker:latest
+
+
+services:
+    - docker:dind
+
+
+before_script:
+    - apk --no-cache add curl
+
+
+stages:
+    - build
+    - deploy
+
+variables:
+    BUILD_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
+    HEROKU_REGISTORY: registry.heroku.com/$HEROKU_APP_NAME/web
+
+build:
+  stage: build
+  tags:
+    - docker
+  script:
+    - echo $CI_BUILD_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin registry.gitlab.com
+    - docker build --no-cache -t $BUILD_IMAGE .
+    - docker push $BUILD_IMAGE
+
+deploy_stg:
+  stage: deploy
+  tags:
+    - docker
+  only:
+    - main
+    - master
+  script:
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - echo $CI_BUILD_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin registry.gitlab.com
+    - docker pull $BUILD_IMAGE
+    - docker tag  $BUILD_IMAGE $HEROKU_REGISTORY
+    - docker push $HEROKU_REGISTORY
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $HEROKU_APP_NAME
