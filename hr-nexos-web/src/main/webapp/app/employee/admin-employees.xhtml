@@ -14,7 +14,7 @@
             <div class="card crud-demo">
                 <p:toolbar>
                     <p:toolbarGroup>
-                        <p:commandButton value="#{msg.employeeNewLabel}"
+                        <p:commandButton value="#{msg.newLabel}"
                                          icon="pi pi-plus"
                                          actionListener="#{beanEmployee.initObject}"
                                          immediate="true"
@@ -24,7 +24,7 @@
                                          style="margin-right: .5rem; margin-bottom: .5rem;">
                             <p:resetInput target=":form:manage-employee-content"/>
                         </p:commandButton>
-                        <p:commandButton value="#{msg.employeeRefreshLabel}"
+                        <p:commandButton value="#{msg.refreshLabel}"
                                          icon="pi pi-refresh"
                                          actionListener="#{beanEmployee.init}"
                                          immediate="true"
@@ -58,7 +58,7 @@
                             <span class="filter-container ui-input-icon-left">
                                     <i class="pi pi-search"/>
                                     <p:inputText id="globalFilter" onkeyup="PF('dtEmployees').filter()"
-                                                 placeholder="#{msg.employeeSearchPlaceholder}"/>
+                                                 placeholder="#{msg.searchPlaceholder}"/>
                             </span>
                         </div>
                     </f:facet>
@@ -208,11 +208,11 @@
 
                     <f:facet name="footer">
                         <div class="surface-border pt-3 flex">
-                            <p:commandButton value="#{msg.employeeSaveButtonLabel}" icon="pi pi-check"
+                            <p:commandButton value="#{msg.saveButtonLabel}" icon="pi pi-check"
                                              actionListener="#{beanEmployee.saveEmployee}"
                                              styleClass="w-6 ml-2"
                                              update="manage-employee-content" process="manage-employee-content @this"/>
-                            <p:commandButton value="#{msg.employeeCancelButtonLabel}" icon="pi pi-times"
+                            <p:commandButton value="#{msg.cancelButtonLabel}" icon="pi pi-times"
                                              onclick="PF('manageEmployeeDialog').hide()"
                                              styleClass="ui-button-outlined w-6 mr-2"/>
                         </div>
@@ -222,19 +222,19 @@
                 <p:confirmDialog widgetVar="deleteEmployeeDialog" showEffect="fade" width="300"
                                  message="#{msg.employeeDialogDeleteMessage}" header="#{msg.dialogDeleteTitle}"
                                  severity="warn">
-                    <p:commandButton value="#{msg.employeeDialogDeleteYesOption}" icon="pi pi-check"
+                    <p:commandButton value="#{msg.dialogDeleteYesOption}" icon="pi pi-check"
                                      actionListener="#{beanEmployee.deleteEmployee}"
                                      process="@this" oncomplete="PF('deleteEmployeeDialog').hide()"/>
-                    <p:commandButton value="#{msg.employeeDialogDeleteNoOption}" type="button"
+                    <p:commandButton value="#{msg.dialogDeleteNoOption}" type="button"
                                      styleClass="ui-button-secondary" icon="pi pi-times"
                                      onclick="PF('deleteEmployeeDialog').hide()"/>
                 </p:confirmDialog>
 
                 <p:confirmDialog global="true" showEffect="fade" width="300">
-                    <p:commandButton value="#{msg.employeeDialogDeleteYesOption}" type="button"
+                    <p:commandButton value="#{msg.dialogDeleteYesOption}" type="button"
                                      styleClass="ui-confirmdialog-yes"
                                      icon="pi pi-check"/>
-                    <p:commandButton value="#{msg.employeeDialogDeleteNoOption}" type="button"
+                    <p:commandButton value="#{msg.dialogDeleteNoOption}" type="button"
                                      styleClass="ui-confirmdialog-no ui-button-secondary"
                                      icon="pi pi-times"/>
                 </p:confirmDialog>

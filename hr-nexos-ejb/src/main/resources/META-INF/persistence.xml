@@ -8,6 +8,8 @@
 
         <jta-data-source>java:jboss/datasources/H2Datasource</jta-data-source>
 
+        <mapping-file>META-INF/NQDepartment.xml</mapping-file>
+
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 

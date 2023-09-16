@@ -92,7 +92,7 @@ public class EmployeeController implements Serializable {
                     getMessage("employeeDeleteOneItemLabel");
         }
 
-        return getMessage("employeeDeleteLabel");
+        return getMessage("deleteLabel");
     }
 
     public boolean hasSelectedEmployees() {

@@ -20,10 +20,11 @@ public class Department implements Serializable {
     private Integer id;
 
     @Column(unique = true)
+    @Size(min = 1, max = 100, message = "Name must be between 1 and 100 characters")
     private String code;
 
     @NotNull(message = "Name cannot be null")
-    @Size(min = 2, max = 30, message = "Name must be between 5 and 200 characters")
+    @Size(min = 2, max = 50, message = "Name must be between 5 and 50 characters")
     private String name;
 
     @Column(name = "created_date")
