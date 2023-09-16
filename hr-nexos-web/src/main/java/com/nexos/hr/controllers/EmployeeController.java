@@ -51,17 +51,17 @@ public class EmployeeController implements Serializable {
     }
 
     public void initObject() {
-        this.selectedEmployee = new Employee();
-        this.selectedEmployee.setDepartment(new Department());
+        selectedEmployee = new Employee();
+        selectedEmployee.setDepartment(new Department());
     }
 
     public void saveEmployee() {
         try {
-            if (this.selectedEmployee.getId() == null) {
+            if (selectedEmployee.getId() == null) {
                 employees.add(employeeService.save(selectedEmployee));
                 showMessage("employeeAddedMessage");
             } else {
-                employeeService.update(this.selectedEmployee);
+                employeeService.update(selectedEmployee);
                 showMessage("employeeUpdatedMessage");
             }
             PrimeFaces.current().executeScript("PF('manageEmployeeDialog').hide()");
@@ -75,8 +75,8 @@ public class EmployeeController implements Serializable {
     public void deleteEmployee() {
         try {
             employeeService.delete(selectedEmployee);
-            this.employees.remove(this.selectedEmployee);
-            this.selectedEmployee = null;
+            employees.remove(selectedEmployee);
+            selectedEmployee = null;
             showMessage("employeeDeletedMessage");
 
             ajaxUpdateFormsAndClearFilters();
@@ -87,7 +87,7 @@ public class EmployeeController implements Serializable {
 
     public String getDeleteButtonMessage() {
         if (hasSelectedEmployees()) {
-            int size = this.selectedEmployees.size();
+            int size = selectedEmployees.size();
             return size > 1 ? size + " " + getMessage("employeeDeleteMultipleItemsLabel") :
                     getMessage("employeeDeleteOneItemLabel");
         }
@@ -96,16 +96,16 @@ public class EmployeeController implements Serializable {
     }
 
     public boolean hasSelectedEmployees() {
-        return this.selectedEmployees != null && !this.selectedEmployees.isEmpty();
+        return selectedEmployees != null && !selectedEmployees.isEmpty();
     }
 
     public void deleteSelectedEmployees() {
         try {
-            for (Employee employee: selectedEmployees) {
+            for (Employee employee : selectedEmployees) {
                 employeeService.delete(employee);
             }
-            this.employees.removeAll(this.selectedEmployees);
-            this.selectedEmployees = null;
+            employees.removeAll(selectedEmployees);
+            selectedEmployees = null;
             showMessage("employeesDeletedMessage");
 
             ajaxUpdateFormsAndClearFilters();

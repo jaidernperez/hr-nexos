@@ -71,28 +71,36 @@
 
                     <p:column selectionMode="multiple" exportable="false"/>
 
-                    <p:column headerText="#{msg.employeeDocumentTypeText}" sortBy="#{employee.documentType}" filterBy="#{employee.documentType}">
+                    <p:column headerText="#{msg.employeeDocumentTypeText}" sortBy="#{employee.documentType}"
+                              filterBy="#{employee.documentType}">
                         <h:outputText value="#{employee.documentType}"/>
                     </p:column>
-                    <p:column headerText="#{msg.employeeDocumentText}" sortBy="#{employee.document}" filterBy="#{employee.document}">
+                    <p:column headerText="#{msg.employeeDocumentText}" sortBy="#{employee.document}"
+                              filterBy="#{employee.document}">
                         <h:outputText value="#{employee.document}"/>
                     </p:column>
-                    <p:column headerText="#{msg.employeeFirstNameText}" sortBy="#{employee.firstName}" filterBy="#{employee.firstName}">
+                    <p:column headerText="#{msg.employeeFirstNameText}" sortBy="#{employee.firstName}"
+                              filterBy="#{employee.firstName}">
                         <h:outputText value="#{employee.firstName}"/>
                     </p:column>
-                    <p:column headerText="#{msg.employeeLastNameText}" sortBy="#{employee.lastName}" filterBy="#{employee.lastName}">
+                    <p:column headerText="#{msg.employeeLastNameText}" sortBy="#{employee.lastName}"
+                              filterBy="#{employee.lastName}">
                         <h:outputText value="#{employee.lastName}"/>
                     </p:column>
-                    <p:column headerText="#{msg.employeeCityText}" sortBy="#{employee.city}" filterBy="#{employee.city}">
+                    <p:column headerText="#{msg.employeeCityText}" sortBy="#{employee.city}"
+                              filterBy="#{employee.city}">
                         <h:outputText value="#{employee.city}"/>
                     </p:column>
-                    <p:column headerText="#{msg.employeeAddressText}" sortBy="#{employee.address}" filterBy="#{employee.address}">
+                    <p:column headerText="#{msg.employeeAddressText}" sortBy="#{employee.address}"
+                              filterBy="#{employee.address}">
                         <h:outputText value="#{employee.address}"/>
                     </p:column>
-                    <p:column headerText="#{msg.employeeEmailText}" sortBy="#{employee.email}" filterBy="#{employee.email}">
+                    <p:column headerText="#{msg.employeeEmailText}" sortBy="#{employee.email}"
+                              filterBy="#{employee.email}">
                         <h:outputText value="#{employee.email}"/>
                     </p:column>
-                    <p:column headerText="#{msg.employeePhoneNumberText}" sortBy="#{employee.phoneNumber}" filterBy="#{employee.phoneNumber}">
+                    <p:column headerText="#{msg.employeePhoneNumberText}" sortBy="#{employee.phoneNumber}"
+                              filterBy="#{employee.phoneNumber}">
                         <h:outputText value="#{employee.phoneNumber}"/>
                     </p:column>
                     <p:column headerText="#{msg.employeeDepartmentText}" sortBy="#{employee.department.name}"
@@ -139,51 +147,59 @@
 
                                 <div class="field mb-2 col-12 md:col-12 lg:col-6">
                                     <label for="document" class="font-medium">#{msg.employeeDocumentText}</label>
-                                    <p:inputText id="document" value="#{beanEmployee.selectedEmployee.document}" required="true"/>
+                                    <p:inputText id="document" value="#{beanEmployee.selectedEmployee.document}"
+                                                 required="true"/>
                                     <p:message for="document" display="text"/>
                                 </div>
 
                                 <div class="field mb-2 col-12 md:col-12 lg:col-6">
                                     <label for="firstName" class="font-medium">#{msg.employeeFirstNameText}</label>
-                                    <p:inputText id="firstName" value="#{beanEmployee.selectedEmployee.firstName}" required="true"/>
+                                    <p:inputText id="firstName" value="#{beanEmployee.selectedEmployee.firstName}"
+                                                 required="true"/>
                                     <p:message for="firstName" display="text"/>
                                 </div>
 
                                 <div class="field mb-2 col-12 md:col-12 lg:col-6">
                                     <label for="lastName" class="font-medium">#{msg.employeeLastNameText}</label>
-                                    <p:inputText id="lastName" value="#{beanEmployee.selectedEmployee.lastName}" required="true"/>
+                                    <p:inputText id="lastName" value="#{beanEmployee.selectedEmployee.lastName}"
+                                                 required="true"/>
                                     <p:message for="lastName" display="text"/>
                                 </div>
 
                                 <div class="field mb-2 col-12 md:col-12 lg:col-6">
                                     <label for="city" class="font-medium">#{msg.employeeCityText}</label>
-                                    <p:inputText id="city" value="#{beanEmployee.selectedEmployee.city}" required="true"/>
+                                    <p:inputText id="city" value="#{beanEmployee.selectedEmployee.city}"
+                                                 required="true"/>
                                     <p:message for="city" display="text"/>
                                 </div>
 
                                 <div class="field mb-2 col-12 md:col-12 lg:col-6">
                                     <label class="font-medium">#{msg.employeeDepartmentText}</label>
                                     <p:selectOneMenu filter="true" filterMatchMode="startsWith"
-                                                     value="#{beanEmployee.selectedEmployee.department.id}" required="true">
+                                                     value="#{beanEmployee.selectedEmployee.department.id}"
+                                                     required="true">
                                         <f:selectItems value="#{beanEmployee.dropdownDepartments}"/>
                                     </p:selectOneMenu>
                                 </div>
 
                                 <div class="field mb-2 col-12 md:col-12">
                                     <label for="address" class="font-medium">#{msg.employeeAddressText}</label>
-                                    <p:inputText id="address" value="#{beanEmployee.selectedEmployee.address}" required="true"/>
+                                    <p:inputText id="address" value="#{beanEmployee.selectedEmployee.address}"
+                                                 required="true"/>
                                     <p:message for="address" display="text"/>
                                 </div>
 
                                 <div class="field mb-2 col-12 md:col-12 lg:col-6">
                                     <label for="email" class="font-medium">#{msg.employeeEmailText}</label>
-                                    <p:inputText id="email" type="email" value="#{beanEmployee.selectedEmployee.email}" required="true"/>
+                                    <p:inputText id="email" type="email" value="#{beanEmployee.selectedEmployee.email}"
+                                                 required="true"/>
                                     <p:message for="email" display="text"/>
                                 </div>
 
                                 <div class="field mb-4 col-12 md:col-12 lg:col-6">
                                     <label for="phoneNumber" class="font-medium">#{msg.employeePhoneNumberText}</label>
-                                    <p:inputText id="phoneNumber" type="number" value="#{beanEmployee.selectedEmployee.phoneNumber}" required="true"/>
+                                    <p:inputText id="phoneNumber" type="number"
+                                                 value="#{beanEmployee.selectedEmployee.phoneNumber}" required="true"/>
                                     <p:message for="phoneNumber" display="text"/>
                                 </div>
                             </div>
