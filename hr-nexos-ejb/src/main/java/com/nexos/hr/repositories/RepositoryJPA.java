@@ -16,16 +16,16 @@ import java.util.List;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class RepositoryJPA<T> implements FacadeJPA<T> {
 
-    @PersistenceContext(unitName = "example_pu")
+    @PersistenceContext(unitName = "hr_pu")
     private EntityManager entityManager;
 
     @Override
-    public void save(T entity) throws Exception {
-        entityManager.persist(entity);
+    public T save(T entity) {
+       return entityManager.merge(entity);
     }
 
     @Override
-    public boolean update(T entity) throws Exception {
+    public boolean update(T entity) {
         boolean response = true;
         try {
             entityManager.merge(entity);
@@ -36,12 +36,12 @@ public class RepositoryJPA<T> implements FacadeJPA<T> {
     }
 
     @Override
-    public void delete(T entity) throws Exception {
+    public void delete(T entity) {
         entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
     }
 
     @Override
-    public List<T> findAll(Class<T> entity) throws Exception {
+    public List<T> findAll(Class<T> entity) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> cq = cb.createQuery(entity);
 
@@ -51,7 +51,7 @@ public class RepositoryJPA<T> implements FacadeJPA<T> {
     }
 
     @Override
-    public List<T> findAll(Class<T> entity, String column) throws Exception {
+    public List<T> findAll(Class<T> entity, String column) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> cq = cb.createQuery(entity);
 
@@ -75,7 +75,7 @@ public class RepositoryJPA<T> implements FacadeJPA<T> {
 
         TypedQuery<T> query = entityManager.createNamedQuery(namedQueryStr, entity);
 
-        if (!column.equals("")) {
+        if (!column.isEmpty()) {
             query.setParameter(column, value);
         }
         list = query.getResultList();
@@ -84,7 +84,7 @@ public class RepositoryJPA<T> implements FacadeJPA<T> {
     }
 
     @Override
-    public T find(Class<T> entity, Integer id) throws Exception {
+    public T find(Class<T> entity, Integer id) {
         return entityManager.find(entity, id);
     }
 
@@ -96,14 +96,14 @@ public class RepositoryJPA<T> implements FacadeJPA<T> {
 
         Root<T> obj = cq.from(entity);
 
-        if (!value.equals("")) {
+        if (!value.isEmpty()) {
             Expression<String> field = cb.lower(obj.get(column));
             Predicate condition = cb.equal(field, value.toLowerCase().trim());
             cq.where(condition);
         }
 
-        TypedQuery<T> consulta = entityManager.createQuery(cq);
-        list = consulta.getResultList();
+        TypedQuery<T> query = entityManager.createQuery(cq);
+        list = query.getResultList();
 
         return list;
     }

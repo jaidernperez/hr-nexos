@@ -7,7 +7,7 @@ import java.util.List;
 @Remote
 public interface FacadeJPA<T> {
 
-    void save(T entity) throws Exception;
+    T save(T entity) throws Exception;
 
     boolean update(T entity) throws Exception;
 

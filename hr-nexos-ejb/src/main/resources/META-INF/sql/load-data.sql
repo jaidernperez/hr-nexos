@@ -1,4 +1,7 @@
-insert into table_example (createAt, name) values ('2021-01-01', 'Jhon');
-insert into table_example (createAt, name) values ('2021-05-02', 'Nick');
-insert into table_example (createAt, name) values ('2021-03-03', 'Ana');
-insert into table_example (createAt, name) values ('2021-06-04', 'María');
+INSERT INTO public.departments (id, code, name, created_date, update_date) VALUES (1, 'D001', 'Marketing', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO public.departments (id, code, name, created_date, update_date) VALUES (2, 'D002', 'Sales', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO public.departments (id, code, name, created_date, update_date) VALUES (3, 'D003', 'Human Resources', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO public.employees (id, document_type, document, first_name, last_name, city, address, email, phone_number, created_date, update_date, id_department) VALUES (1, 2, '123456789', 'Juan', 'Perez', 'Bogota', 'Calle 123 #45-67', 'juan.perez@example.com', '3001234567', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1);
+INSERT INTO public.employees (id, document_type, document, first_name, last_name, city, address, email, phone_number, created_date, update_date, id_department) VALUES (2, 1, '987654321', 'Maria', 'Rodriguez', 'Medellin', 'Carrera 76 #54-32', 'maria.rodriguez@example.com', '3109876543', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2);
+INSERT INTO public.employees (id, document_type, document, first_name, last_name, city, address, email, phone_number, created_date, update_date, id_department) VALUES (3, 2, '456789123', 'Carlos', 'Gomez', 'Cali', 'Avenida 5N #23-34', 'carlos.gomez@example.com', '3204567891', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 3);
