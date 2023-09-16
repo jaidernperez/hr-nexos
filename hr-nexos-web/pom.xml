@@ -22,6 +22,7 @@
         <mvn.war.plugin.version>3.3.2</mvn.war.plugin.version>
         <mvn.dependency.plugin.version>3.5.0</mvn.dependency.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <lombok.version>1.18.24</lombok.version>
     </properties>
 
     <dependencies>
@@ -41,6 +42,13 @@
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>${primefaces.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

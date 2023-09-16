@@ -1,18 +1,9 @@
 @charset "UTF-8";
 
-#cabecera-error{
-background-color:#deddda;
+.sidebar-with {
+    width: 200px;
 }
 
-.ui-widget {
-font-size: 14px !important;
-}
-
-.ui-layout-north {
-z-index: 20 !important;
-overflow: visible !important;
-}
-
-.ui-layout-north .ui-layout-unit-content {
-overflow: visible !important;
+.profile-height {
+    height: 60px;
 }
