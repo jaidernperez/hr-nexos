@@ -57,18 +57,23 @@ public class EmployeeController implements Serializable {
 
     public void saveEmployee() {
         try {
-            if (selectedEmployee.getId() == null) {
-                employees.add(employeeService.save(selectedEmployee));
-                showMessage("employeeAddedMessage");
-            } else {
-                employeeService.update(selectedEmployee);
-                showMessage("employeeUpdatedMessage");
-            }
+            saveOrUpdate();
             PrimeFaces.current().executeScript("PF('manageEmployeeDialog').hide()");
             ajaxUpdateFormsAndClearFilters();
             initObject();
+            init();
         } catch (Exception e) {
             showErrorMessage("savingEmployeeError");
+        }
+    }
+
+    private void saveOrUpdate() throws Exception {
+        if (selectedEmployee.getId() == null) {
+            employees.add(employeeService.save(selectedEmployee));
+            showMessage("employeeAddedMessage");
+        } else {
+            employeeService.update(selectedEmployee);
+            showMessage("employeeUpdatedMessage");
         }
     }
 
@@ -138,18 +143,20 @@ public class EmployeeController implements Serializable {
     }
 
     private void ajaxUpdateFormsAndClearFilters() {
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-employees");
+        PrimeFaces.current().ajax().update("form:dt-employees");
         PrimeFaces.current().executeScript("PF('dtEmployees').clearFilters()");
     }
 
     private void showMessage(String detailKey) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(getMessage("successMessage"),
                 getMessage(detailKey)));
+        PrimeFaces.current().ajax().update("form:messages");
     }
 
     private void showErrorMessage(String message) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(getMessage("errorMessage"),
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, getMessage("errorMessage"),
                 getMessage(message)));
+        PrimeFaces.current().ajax().update("form:messages");
     }
 
     private String getMessage(String key) {

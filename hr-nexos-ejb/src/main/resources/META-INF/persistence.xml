@@ -6,7 +6,7 @@
 
     <persistence-unit name="hr_pu" transaction-type="JTA">
 
-        <jta-data-source>java:jboss/datasources/H2Datasource</jta-data-source>
+        <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
 
         <mapping-file>META-INF/NQDepartment.xml</mapping-file>
 

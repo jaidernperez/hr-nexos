@@ -41,7 +41,7 @@
     </session-config>
 
     <welcome-file-list>
-        <welcome-file>index.faces</welcome-file>
+        <welcome-file>/app/employee/admin-employees.faces</welcome-file>
     </welcome-file-list>
 
     <error-page>

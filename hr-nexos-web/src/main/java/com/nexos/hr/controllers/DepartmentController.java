@@ -5,7 +5,6 @@ import com.nexos.hr.services.DepartmentService;
 import com.nexos.hr.utilities.Properties;
 import lombok.Data;
 import org.primefaces.PrimeFaces;
-import org.primefaces.event.SelectEvent;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -16,7 +15,6 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @Named("beanDepartment")
@@ -48,18 +46,30 @@ public class DepartmentController implements Serializable {
 
     public void saveDepartment() {
         try {
-            if (selectedDepartment.getId() == null) {
-                departments.add(departmentService.save(selectedDepartment));
-                showMessage("departmentAddedMessage");
+            List<Department> departmentsFound = departmentService
+                    .findByField(Department.class, "code", selectedDepartment.getCode());
+
+            if (departmentsFound.isEmpty()) {
+                saveOrUpdate();
+                PrimeFaces.current().executeScript("PF('manageDepartmentDialog').hide()");
+                ajaxUpdateFormsAndClearFilters();
+                initObject();
+                init();
             } else {
-                departmentService.update(selectedDepartment);
-                showMessage("departmentUpdatedMessage");
+                showErrorMessage("savingDepartmentNotUnique");
             }
-            PrimeFaces.current().executeScript("PF('manageDepartmentDialog').hide()");
-            ajaxUpdateFormsAndClearFilters();
-            initObject();
         } catch (Exception e) {
             showErrorMessage("savingDepartmentError");
+        }
+    }
+
+    private void saveOrUpdate() throws Exception {
+        if (selectedDepartment.getId() == null) {
+            departments.add(departmentService.save(selectedDepartment));
+            showMessage("departmentAddedMessage");
+        } else {
+            departmentService.update(selectedDepartment);
+            showMessage("departmentUpdatedMessage");
         }
     }
 
@@ -79,8 +89,7 @@ public class DepartmentController implements Serializable {
     public String getDeleteButtonMessage() {
         if (hasSelectedDepartments()) {
             int size = selectedDepartments.size();
-            return size > 1 ? size + " " + getMessage("departmentDeleteMultipleItemsLabel") :
-                    getMessage("departmentDeleteOneItemLabel");
+            return size > 1 ? size + " " + getMessage("departmentDeleteMultipleItemsLabel") : getMessage("departmentDeleteOneItemLabel");
         }
 
         return getMessage("deleteLabel");
@@ -111,18 +120,18 @@ public class DepartmentController implements Serializable {
     }
 
     private void ajaxUpdateFormsAndClearFilters() {
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-departments");
+        PrimeFaces.current().ajax().update("form:dt-departments");
         PrimeFaces.current().executeScript("PF('dtDepartments').clearFilters()");
     }
 
     private void showMessage(String detailKey) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(getMessage("successMessage"),
-                getMessage(detailKey)));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(getMessage("successMessage"), getMessage(detailKey)));
+        PrimeFaces.current().ajax().update("form:messages");
     }
 
     private void showErrorMessage(String message) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(getMessage("errorMessage"),
-                getMessage(message)));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, getMessage("errorMessage"), getMessage(message)));
+        PrimeFaces.current().ajax().update("form:messages");
     }
 
     private String getMessage(String key) {

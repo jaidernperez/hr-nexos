@@ -5,5 +5,5 @@
            xsi:schemaLocation="
       http://www.jboss.com/xml/ns/javaee
       http://www.jboss.org/j2ee/schema/jboss-web_5_1.xsd">
-    <context-root>web</context-root>
+    <context-root>hr-nexos-web</context-root>
 </jboss-web>
