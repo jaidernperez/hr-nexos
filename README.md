@@ -3,7 +3,9 @@
 ## Table of contents
 * [General info](#general-info)
 * [Configuring the Wildfly Server](#configuring-the-wildfly-server)
+* [Project Execution](#project-execution)
 * [Executing the project in docker](#executing-the-project-in-docker)
+* [Application Showcase](#application-showcase)
 
 ## General info
 The project is a management system that focuses on two main entities: departments and employees. In the domain layer,
@@ -98,6 +100,51 @@ data-source add --name=H2Datasource --jndi-name=java:jboss/datasources/H2Datasou
 ```
 To exit from Jboss CLI, simply type `exit`.
 
+## Project Execution
+
+To run the project, ensure that you have set up the Wildfly server as outlined in the previous step and have installed 
+**mvn** on your operating system.
+
+1. Navigate to the project folder and execute the following command:
+
+   ```sh
+   mvn -f pom.xml clean package
+   ```
+2. Transfer the ear artifact to the Wildfly Server:
+
+   <br>   
+
+   For MacOS asn Linux:
+
+   ```sh
+   cp hr-nexos-ear/target/hr-nexos-ear-1.0-SNAPSHOT.ear <SERVER-PATH>/wildfly-24/standalone/deployments/
+   ```
+   For Windows:
+      ```sh
+   copy hr-nexos-ear\target\hr-nexos-ear-1.0-SNAPSHOT.ear <SERVER-PATH>\wildfly-24\standalone\deployments\
+   ```
+   
+   Replace **<SERVER-PATH>** with the path of the previously configured Wildfly Server.
+
+   <br>   
+
+3. **Starting the Wildfly Server**: First, you need to go to the Wildfly directory. Depending on your operating system, 
+use the corresponding command to initiate the Wildfly server:
+
+   <br>   
+
+   For MacOS or Linux:
+   ```sh
+   ./wilfly-24/bin/standalone.sh
+   ```
+   For Windows:
+   ```bash
+   wilfly-24\bin\standalone.bat
+   ```
+   
+4. **Accessing the Web Application**: Once the server is up and running, you can open the web application in your browser 
+using the following link: `http://127.0.0.1:8080/hr-nexos-web/`.
+
 ## Executing the Project in Docker
 
 To run the project in Docker, follow the steps below:
@@ -112,3 +159,36 @@ To run the project in Docker, follow the steps below:
     ```
 In this command, we’re mapping port 8083 on your machine to port 80 on the Docker container. The -e PORT=80 sets an 
 environment variable inside the container that specifies the port the application should listen on.
+
+## Application Showcase
+
+Here’s a quick overview of the application:
+
+1. Employee View
+
+   * The following image presents the employee management view. Here, you can perform operations such as creating, 
+   updating, and deleting one or multiple employees.
+   
+   <br>
+
+   ![Employee Management](https://files-manager-jp.s3.us-east-2.amazonaws.com/employeeView.png)
+
+   <br>
+
+   * The subsequent image displays the employee details modal. This feature allows you to edit the current information
+   of an individual employee.
+
+   <br>
+
+   ![Employee Details](https://files-manager-jp.s3.us-east-2.amazonaws.com/employeeDetails.png)
+
+   <br>
+
+2. Department view
+
+   * The department management view, as shown in the next image, allows you to oversee all departments. Here, you can 
+   perform various operations such as creating new departments, updating existing ones, or deleting departments as needed.
+   
+   <br>
+   
+   ![Department Management](https://files-manager-jp.s3.us-east-2.amazonaws.com/departmentsView.png)
