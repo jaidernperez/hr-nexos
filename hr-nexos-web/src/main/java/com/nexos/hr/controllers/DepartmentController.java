@@ -46,30 +46,34 @@ public class DepartmentController implements Serializable {
 
     public void saveDepartment() {
         try {
-            List<Department> departmentsFound = departmentService
-                    .findByField(Department.class, "code", selectedDepartment.getCode());
-
-            if (departmentsFound.isEmpty()) {
-                saveOrUpdate();
-                PrimeFaces.current().executeScript("PF('manageDepartmentDialog').hide()");
-                ajaxUpdateFormsAndClearFilters();
-                initObject();
-                init();
+            if (selectedDepartment.getId() == null) {
+                saveOption();
             } else {
-                showErrorMessage("savingDepartmentNotUnique");
+                departmentService.update(selectedDepartment);
+                showMessage("departmentUpdatedMessage");
+                closeDepartmentDialog();
             }
         } catch (Exception e) {
             showErrorMessage("savingDepartmentError");
         }
     }
 
-    private void saveOrUpdate() throws Exception {
-        if (selectedDepartment.getId() == null) {
+    private void closeDepartmentDialog() {
+        PrimeFaces.current().executeScript("PF('manageDepartmentDialog').hide()");
+        ajaxUpdateFormsAndClearFilters();
+        initObject();
+        init();
+    }
+
+    private void saveOption() throws Exception {
+        List<Department> departmentsFound = departmentService
+                .findByField(Department.class, "code", selectedDepartment.getCode());
+        if (departmentsFound.isEmpty()) {
             departments.add(departmentService.save(selectedDepartment));
             showMessage("departmentAddedMessage");
+            closeDepartmentDialog();
         } else {
-            departmentService.update(selectedDepartment);
-            showMessage("departmentUpdatedMessage");
+            showErrorMessage("savingDepartmentNotUnique");
         }
     }
 
