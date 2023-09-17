@@ -112,8 +112,6 @@ To run the project, ensure that you have set up the Wildfly server as outlined i
    ```
 2. Transfer the ear artifact to the Wildfly Server:
 
-   <br>   
-
    For MacOS asn Linux:
 
    ```sh
@@ -126,12 +124,8 @@ To run the project, ensure that you have set up the Wildfly server as outlined i
    
    Replace **<SERVER-PATH>** with the path of the previously configured Wildfly Server.
 
-   <br>   
-
 3. **Starting the Wildfly Server**: First, you need to go to the Wildfly directory. Depending on your operating system, 
 use the corresponding command to initiate the Wildfly server:
-
-   <br>   
 
    For MacOS or Linux:
    ```sh
