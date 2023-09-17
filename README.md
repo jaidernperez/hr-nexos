@@ -122,7 +122,7 @@ To run the project, ensure that you have set up the Wildfly server as outlined i
    copy hr-nexos-ear\target\hr-nexos-ear-1.0-SNAPSHOT.ear <SERVER-PATH>\wildfly-24\standalone\deployments\
    ```
    
-   Replace **<SERVER-PATH>** with the path of the previously configured Wildfly Server.
+   Replace <**SERVER-PATH**> with the path of the previously configured Wildfly Server.
 
 3. **Starting the Wildfly Server**: First, you need to go to the Wildfly directory. Depending on your operating system, 
 use the corresponding command to initiate the Wildfly server:
